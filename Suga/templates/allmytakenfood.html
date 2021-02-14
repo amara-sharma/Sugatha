@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% block c %}
+{% for i in l %}
+       <article class="content-section">
+        <h1><a class="article-title" href="#">{{ i.name }}</a></h1>
+        <h2>{{i.contactno}}</h2>
+        <h2>{{i.tfood}}</h2>
+        <h2>{{i.city}}</h2>
+        <h2>{{i.address}}</h2>
+        <div>
+          <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{url_for('cancelling',id=i.id)}}">Sorry I cant take it &#128532;!</a>
+          <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{url_for('completed',id=i.id)}}">Yay!I have taken it!</a>
+        </div>
+       </article>
+{% endfor %}
+{% endblock c %}

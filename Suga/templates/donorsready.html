@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+{% block c %}
+<div class="content-section">
+  <form method="POST" action="" enctype="multipart/form-data">
+       {{f.hidden_tag()}}        
+       <div class="row">
+              {% if f.city.errors %}
+                   {{f.city(class="form-control form-control-lg is-invalid")}}
+                   <div class="invalid-feedback">
+                       {% for e in f.city.errors %}
+                          <span>{{e}}</span>
+                       {% endfor %}
+                   </div>
+              {% else %}
+                    <div class="col-lg-10">
+                         {{f.city(placeholder="Enter city here" , class="form-control form-control-lg")}}
+                    </div>
+                    <div class="col-lg-2">
+                         <button type="submit" style="height:47.8px;width: 50px;margin-left: -32px;"><i class="fa fa-search"></i></button>
+                    </div>
+              {% endif %}
+       </div>
+</form>
+</div>
+{% for i in fd %}
+       <article class="content-section">
+        <h1><a class="article-title" href="#">{{ i.name }}</a></h1>
+        <h2>{{i.contactno}}</h2>
+        <h2>{{i.tfood}}</h2>
+        <h2>{{i.city}}</h2>
+        <h2>{{i.address}}</h2>
+        {% if i.taken=="TrueP" %}
+               <div>
+                  <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{url_for('notify',foodid=i.id)}}">Notify me,if its available!</a>
+               </div>
+        {% else %}
+           <div>
+               <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{url_for('updateit',foodid=i.id)}}">Iam taking it!</a>
+           </div>
+        {% endif %}
+       </article>
+{% endfor %}
+{% endblock c %}

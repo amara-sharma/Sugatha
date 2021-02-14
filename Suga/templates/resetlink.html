@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% block c %}
+<div class="content-section">
+<form method="POST" action="" enctype="multipart/form-data">
+    {{f.hidden_tag()}}          <!--to protect our app-->
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-4" style="font-family: cursive;color: lightcoral;">Request For Password Reset</legend>
+        <div class="form-group">
+          {{f.email.label(class="form-control-label")}}
+          <br>
+          {% if f.email.errors %}
+               {{f.email(class="form-control form-control-lg is-invalid")}}
+               <div class="invalid-feedback">
+                   {% for e in f.email.errors %}
+                      <span>{{e}}</span>
+                   {% endfor %}
+               </div>
+          {% else %}
+               {{f.email(placeholder="Enter email here" , class="form-control form-control-lg")}}
+          {% endif %}
+     </div>
+    </fieldset>
+    {{f.submit(class="btn btn-outline-info")}}
+    </form> 
+</div>
+{% endblock c %}
